@@ -34,10 +34,7 @@ def signup():
         # if existing_user:
         #     return jsonify({'message': 'User already exists'}), 400
 
-        user = User(name, username, password)
-        print(user)
-
-        user.save()
+        mongo.db['users'].insert_one(data)
         print("user saved")
         access_token = create_access_token(identity=username)
         return jsonify({'message': 'User created successfully', 'access_token': access_token}), 201
